@@ -1,0 +1,44 @@
+name: FounderFlow Vercel Prep
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  fix-api-url:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update frontend API URL for Vercel
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('frontend/script.js')
+          s = p.read_text(encoding='utf-8')
+          old = 'const API_URL = "http://127.0.0.1:8000";'
+          new = 'const API_URL = window.location.origin + "/api";'
+          if old in s:
+              p.write_text(s.replace(old, new, 1), encoding='utf-8')
+              print('Updated API_URL for Vercel.')
+          else:
+              print('No localhost API_URL found; no change needed.')
+          PY
+
+      - name: Commit frontend fix
+        shell: bash
+        run: |
+          if git diff --quiet -- frontend/script.js; then
+            echo "No frontend change required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add frontend/script.js
+          git commit -m "Fix frontend API URL for Vercel"
+          git push
