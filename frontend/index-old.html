@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="FounderFlow - AI-powered startup exit intelligence">
+
+    <title>FounderFlow — Startup Exit Intelligence</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- MOBILE OVERLAY -->
+    <div id="mobileOverlay" class="mobile-overlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+
+        <div class="brand">
+            <div class="brand-mark">
+                <span>F</span>
+            </div>
+
+            <div class="brand-text">
+                <strong>FounderFlow</strong>
+                <small>Investor Intelligence</small>
+            </div>
+
+            <button id="closeSidebar" class="mobile-close">×</button>
+        </div>
+
+        <div class="nav-label">WORKSPACE</div>
+
+        <nav class="navigation">
+
+            <button class="nav-link active" data-section="dashboard">
+                <span class="nav-icon">⌂</span>
+                <span>Overview</span>
+            </button>
+
+            <button class="nav-link" data-section="prediction">
+                <span class="nav-icon">◇</span>
+                <span>New Prediction</span>
+                <span class="nav-arrow">›</span>
+            </button>
+
+            <button class="nav-link" data-section="importance">
+                <span class="nav-icon">◉</span>
+                <span>Feature Importance</span>
+            </button>
+
+        </nav>
+
+        <div class="nav-label model-label">MODEL</div>
+
+        <button class="nav-link model-details-btn" data-section="model">
+            <span class="nav-icon">ⓘ</span>
+            <span>Model Details</span>
+        </button>
+
+        <div class="sidebar-bottom">
+
+            <div class="endpoint-card">
+                <div class="endpoint-title">
+                    <span class="live-dot"></span>
+                    Production API
+                </div>
+
+                <div class="endpoint-url">
+                    127.0.0.1:8000
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <span>FOUNDERFLOW</span>
+                <span>v1.0</span>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button id="openSidebar" class="mobile-menu">
+                    ☰
+                </button>
+
+                <div>
+                    <div class="topbar-kicker">
+                        EXIT INTELLIGENCE
+                    </div>
+
+                    <div id="pageTitle" class="topbar-title">
+                        Overview
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="api-status" id="apiStatus">
+                <span class="status-indicator checking"></span>
+                <span>Checking API</span>
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+        <div class="content">
+
+
+            <!-- ==================================================
+                 DASHBOARD
+            ================================================== -->
+
+            <section id="dashboard" class="page-section active">
+
+                <div class="hero reveal">
+
+                    <div class="hero-content">
+
+                        <div class="eyebrow">
+                            <span class="spark">✦</span>
+                            DECISION WORKSPACE
+                        </div>
+
+                        <h1>
+                            Turn startup signals into
+                            <span>exit intelligence.</span>
+                        </h1>
+
+                        <p>
+                            Evaluate a startup profile through the
+                            FounderFlow machine-learning model and
+                            understand its predicted exit outcome.
+                        </p>
+
+                        <button
+                            class="primary-button"
+                            data-go="prediction">
+
+                            Start Analysis
+
+                            <span>→</span>
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="hero-model">
+
+                        <div class="model-icon">
+                            ◈
+                        </div>
+
+                        <div class="model-label-small">
+                            ACTIVE MODEL
+                        </div>
+
+                        <div class="model-name">
+                            Random Forest
+                        </div>
+
+                        <div class="model-meta">
+                            200 estimators
+                        </div>
+
+                        <div class="model-line">
+                            <span></span>
+                        </div>
+
+                        <div class="model-foot">
+                            Production classifier
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- METRICS -->
+
+                <div class="metrics-grid reveal delay-1">
+
+                    <div class="metric-card">
+
+                        <div class="metric-top">
+                            <div class="metric-icon">◉</div>
+                            <span class="metric-live"></span>
+                        </div>
+
+                        <div class="metric-label">
+                            MODEL STATUS
+                        </div>
+
+                        <div id="dashboardStatus"
+                             class="metric-value">
+                            Checking
+                        </div>
+
+                        <div class="metric-description">
+                            Live FastAPI health
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <div class="metric-top">
+                            <div class="metric-icon">◎</div>
+                        </div>
+
+                        <div class="metric-label">
+                            PREDICTION TARGET
+                        </div>
+
+                        <div class="metric-value">
+                            Exited / Not Exited
+                        </div>
+
+                        <div class="metric-description">
+                            Historical exit classification
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <div class="metric-top">
+                            <div class="metric-icon">◇</div>
+                        </div>
+
+                        <div class="metric-label">
+                            INPUT SIGNALS
+                        </div>
+
+                        <div class="metric-value">
+                            15 Model Inputs
+                        </div>
+
+                        <div class="metric-description">
+                            Dataset-compatible signals
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <div class="metric-top">
+                            <div class="metric-icon">▥</div>
+                        </div>
+
+                        <div class="metric-label">
+                            MODEL ENSEMBLE
+                        </div>
+
+                        <div class="metric-value">
+                            200 Trees
+                        </div>
+
+                        <div class="metric-description">
+                            RandomForestClassifier
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOWER DASHBOARD -->
+
+                <div class="dashboard-grid reveal delay-2">
+
+                    <div class="panel quick-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+                                <div class="panel-kicker">
+                                    QUICK START
+                                </div>
+
+                                <h2>
+                                    Analyze a startup
+                                </h2>
+                            </div>
+
+                            <div class="panel-number">
+                                01
+                            </div>
+
+                        </div>
+
+                        <p>
+                            Enter the 15 signals used by the production
+                            model and receive a probability-based exit
+                            prediction.
+                        </p>
+
+                        <button
+                            class="secondary-button"
+                            data-go="prediction">
+
+                            Create Prediction
+                            <span>→</span>
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+                                <div class="panel-kicker">
+                                    MODEL SIGNALS
+                                </div>
+
+                                <h2>
+                                    Top features
+                                </h2>
+                            </div>
+
+                            <button
+                                class="text-button"
+                                data-go="importance">
+
+                                View all →
+
+                            </button>
+
+                        </div>
+
+                        <div id="dashboardImportance"
+                             class="mini-importance">
+
+                            <div class="loading-line"></div>
+                            <div class="loading-line"></div>
+                            <div class="loading-line"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 PREDICTION
+            ================================================== -->
+
+            <section id="prediction" class="page-section">
+
+                <div class="page-heading reveal">
+
+                    <div class="eyebrow">
+                        STARTUP ANALYSIS
+                    </div>
+
+                    <h2>
+                        Predict exit probability
+                    </h2>
+
+                    <p>
+                        Enter the startup signals expected by the current
+                        production model. The model returns the probability
+                        of the startup being <strong>Exited</strong> or
+                        <strong>Not Exited</strong>.
+                    </p>
+
+                </div>
+
+
+                <div class="panel reveal" style="margin-bottom: 18px; padding: 20px 22px;">
+                    <div class="panel-kicker">HOW TO READ THIS PAGE</div>
+                    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:12px;">
+                        <div>
+                            <strong style="display:block; margin-bottom:6px;">1. Enter startup signals</strong>
+                            <span style="color:var(--muted); font-size:13px; line-height:1.6;">
+                                The current model expects 15 numeric values from the training dataset. Some fields are dataset codes rather than human-readable names.
+                            </span>
+                        </div>
+                        <div>
+                            <strong style="display:block; margin-bottom:6px;">2. Run the model</strong>
+                            <span style="color:var(--muted); font-size:13px; line-height:1.6;">
+                                FounderFlow sends the values to the FastAPI production endpoint and the Random Forest classifier.
+                            </span>
+                        </div>
+                        <div>
+                            <strong style="display:block; margin-bottom:6px;">3. Read the result</strong>
+                            <span style="color:var(--muted); font-size:13px; line-height:1.6;">
+                                <b>Exited</b> means the model predicts an exit class. <b>Not Exited</b> means it predicts the non-exit class. This is a probability estimate, not a guarantee.
+                            </span>
+                        </div>
+                    </div>
+                    <div style="margin-top:16px; padding:12px 14px; border:1px solid rgba(128,92,255,.25); border-radius:10px; background:rgba(128,92,255,.06); color:var(--muted); font-size:12px; line-height:1.6;">
+                        <strong style="color:var(--text);">Important:</strong> This version keeps the existing 15-feature production model unchanged. Therefore fields such as Country Code, Industry Code, Tags Code and Exit Type Code are required in the same numeric format used by that model.
+                    </div>
+                </div>
+
+
+                <div class="prediction-layout">
+
+                    <!-- FORM -->
+
+                    <form id="predictionForm"
+                          class="panel prediction-form reveal">
+
+                        <div class="form-header">
+
+                            <div>
+
+                                <div class="panel-kicker">
+                                    STARTUP PROFILE
+                                </div>
+
+                                <h3>
+                                    Startup signals
+                                </h3>
+
+                            </div>
+
+                            <div class="form-progress">
+                                <strong id="formCount">0</strong>
+                                <span>/15</span>
+                            </div>
+
+                        </div>
+
+
+                        <!-- COMPANY -->
+
+                        <div class="form-section">
+
+                            <div class="form-section-title">
+                                COMPANY
+                                <span></span>
+                            </div>
+
+                            <div class="form-grid">
+
+                                <div class="field">
+                                    <label for="founded_year">
+                                        Founded Year
+                                    </label>
+
+                                    <input
+                                        id="founded_year"
+                                        type="number"
+                                        placeholder="2018"
+                                        required>
+                                </div>
+
+
+                                <div class="field">
+                                    <label for="country">
+                                        Country Code
+                                    </label>
+                                    <span style="display:block;color:var(--muted);font-size:11px;margin-top:5px;">Dataset numeric code</span>
+
+                                    <input
+                                        id="country"
+                                        type="number"
+                                        placeholder="118"
+                                        required>
+                                </div>
+
+
+                                <div class="field">
+                                    <label for="region">
+                                        Region Code
+                                    </label>
+                                    <span style="display:block;color:var(--muted);font-size:11px;margin-top:5px;">Dataset numeric code</span>
+
+                                    <input
+                                        id="region"
+                                        type="number"
+                                        placeholder="4"
+                                        required>
+                                </div>
+
+
+                                <div class="field">
+                                    <label for="industry">
+                                        Industry Code
+                                    </label>
+                                    <span style="display:block;color:var(--muted);font-size:11px;margin-top:5px;">Dataset numeric code</span>
+
+                                    <input
+                                        id="industry"
+                                        type="number"
+                                        placeholder="1"
+                                        required>
+                                </div>
+
+
+                                <div class="field">
+                                    <label for="employee_count">
+                                        Employees
+                                    </label>
+
+                                    <input
+                                        id="employee_count"
+                                        type="number"
+                                        placeholder="150"
+                                        required>
+                                </div>
+
+
+                                <div class="field">
+                                    <label for="estimated_revenue_usd">
+                                        Estimated Revenue
+                                    </label>
+
+                                    <div class="input-prefix">
+                                        <span>$</span>
+
+                                        <input
+                                            id="estimated_revenue_usd"
+                                            type="number"
+                                            step="any"
+                                            placeholder="5000000"
+                                            required>
+                                    </div>
+                                </div>
+
+
+                                <div class="field">
+                                    <label for="estimated_valuation_usd">
+                                        Estimated Valuation
+                                    </label>
+
+                                    <div class="input-prefix">
+                                        <span>$</span>
+
+                                        <input
+                                            id="estimated_valuation_usd"
+                                            type="number"
+                                            step="any"
+                                            placeholder="50000000"
+                                            required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- FUNDING -->
+
+                        <div class="form-section">
+
+                            <div class="form-section-title">
+                                FUNDING
+                                <span></span>
+                            </div>
+
+                            <div class="form-grid">
+
+                                <div class="field">
+                                    <label for="funding_round">
+                                        Funding Round Code
+                                    </label>
+                                    <span style="display:block;color:var(--muted);font-size:11px;margin-top:5px;">0–6 in the training dataset</span>
+
+                                    <input
+                                        id="funding_round"
+                                        type="number"
+                                        placeholder="3"
+                                        required>
+                                </div>
+
+
+                                <div class="field">
+                                    <label for="funding_amount_usd">
+                                        Funding Amount
+                                    </label>
+
+                                    <div class="input-prefix">
+                                        <span>$</span>
+
+                                        <input
+                                            id="funding_amount_usd"
+                                            type="number"
+                                            placeholder="10000000"
+                                            required>
+                                    </div>
+                                </div>
+
+
+                                <div class="field">
+                                    <label for="lead_investor">
+                                        Lead Investor Code
+                                    </label>
+                                    <span style="display:block;color:var(--muted);font-size:11px;margin-top:5px;">Dataset numeric code</span>
+
+                                    <input
+                                        id="lead_investor"
+                                        type="number"
+                                        placeholder="3"
+                                        required>
+                                </div>
+
+
+                                <div class="field">
+                                    <label for="co_investors">
+                                        Co-Investor Count / Code
+                                    </label>
+                                    <span style="display:block;color:var(--muted);font-size:11px;margin-top:5px;">Numeric dataset value</span>
+
+                                    <input
+                                        id="co_investors"
+                                        type="number"
+                                        placeholder="20"
+                                        required>
+                                </div>
+
+
+                                <div class="field">
+                                    <label for="funding_year">
+                                        Funding Year
+                                    </label>
+
+                                    <input
+                                        id="funding_year"
+                                        type="number"
+                                        placeholder="2024"
+                                        required>
+                                </div>
+
+
+                                <div class="field">
+                                    <label for="funding_month">
+                                        Funding Month
+                                    </label>
+
+                                    <input
+                                        id="funding_month"
+                                        type="number"
+                                        min="1"
+                                        max="12"
+                                        placeholder="6"
+                                        required>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- SIGNALS -->
+
+                        <div class="form-section">
+
+                            <div class="form-section-title">
+                                MODEL-SPECIFIC SIGNALS
+                                <span></span>
+                            </div>
+
+                            <div class="form-grid">
+
+                                <div class="field">
+                                    <label for="exit_type">
+                                        Exit Type Code <span style="color:var(--red);">• legacy model input</span>
+                                    </label>
+                                    <span style="display:block;color:var(--muted);font-size:11px;margin-top:5px;">Required by the current model; do not interpret as the prediction itself</span>
+
+                                    <input
+                                        id="exit_type"
+                                        type="number"
+                                        placeholder="2"
+                                        required>
+                                </div>
+
+
+                                <div class="field">
+                                    <label for="tags">
+                                        Tags Code
+                                    </label>
+                                    <span style="display:block;color:var(--muted);font-size:11px;margin-top:5px;">Dataset numeric code</span>
+
+                                    <input
+                                        id="tags"
+                                        type="number"
+                                        placeholder="9902"
+                                        required>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-footer">
+
+                            <div class="privacy-note">
+                                <span>✓</span>
+                                No profile data is stored.
+                            </div>
+
+                            <button
+                                type="submit"
+                                id="predictButton"
+                                class="primary-button">
+
+                                <span class="button-icon">✦</span>
+
+                                Run Prediction
+
+                                <span>→</span>
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+
+                    <!-- RESULT -->
+
+                    <aside class="result-column">
+
+                        <div id="resultPanel"
+                             class="panel result-panel">
+
+                            <div class="result-empty">
+
+                                <div class="result-orbit">
+                                    <div class="orbit-core">
+                                        ◈
+                                    </div>
+                                </div>
+
+                                <div class="result-kicker">
+                                    PREDICTION RESULT
+                                </div>
+
+                                <h3>
+                                    Awaiting analysis
+                                </h3>
+
+                                <p>
+                                    Complete the startup profile to calculate
+                                    the probabilities for <strong>Exited</strong>
+                                    and <strong>Not Exited</strong>.
+                                </p>
+
+                                <div style="margin-top:14px;padding:12px 14px;border-radius:10px;background:rgba(128,92,255,.06);border:1px solid rgba(128,92,255,.18);font-size:12px;color:var(--muted);line-height:1.55;">
+                                    <strong style="color:var(--text);">Exited:</strong> the model predicts an exit class.
+                                    <br>
+                                    <strong style="color:var(--text);">Not Exited:</strong> the model predicts the non-exit class.
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="panel" style="margin-top:14px;">
+                            <div class="panel-kicker">RESULT GUIDE</div>
+                            <h3 style="margin:6px 0 8px;">What does the prediction mean?</h3>
+                            <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.65;">
+                                FounderFlow reports two probabilities. A higher <strong>Exited</strong> probability means the model sees the startup as more similar to historical records in the exited class. A higher <strong>Not Exited</strong> probability means the opposite.
+                            </p>
+                            <p style="margin:10px 0 0;color:var(--muted);font-size:12px;line-height:1.6;">
+                                These numbers describe model confidence for the supplied data; they are not a guarantee of a future acquisition or IPO.
+                            </p>
+                        </div>
+
+
+                        <!-- FEATURE MINI PANEL -->
+
+                        <div class="panel">
+
+                            <div class="panel-header">
+
+                                <div>
+                                    <div class="panel-kicker">
+                                        MODEL SIGNALS
+                                    </div>
+
+                                    <h3>
+                                        Feature importance
+                                    </h3>
+                                </div>
+
+                            </div>
+
+                            <div id="predictionImportance"
+                                 class="mini-importance">
+
+                                <div class="loading-line"></div>
+                                <div class="loading-line"></div>
+                                <div class="loading-line"></div>
+
+                            </div>
+
+                        </div>
+
+                    </aside>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 IMPORTANCE
+            ================================================== -->
+
+            <section id="importance" class="page-section">
+
+                <div class="page-heading reveal">
+
+                    <div class="eyebrow">
+                        MODEL EXPLAINABILITY
+                    </div>
+
+                    <h2>
+                        Feature importance
+                    </h2>
+
+                    <p>
+                        Global feature importance returned directly
+                        by the Random Forest model.
+                    </p>
+
+                </div>
+
+
+                <div class="panel importance-panel reveal">
+
+                    <div class="importance-header">
+
+                        <div>
+                            <span>RANK</span>
+                        </div>
+
+                        <div>
+                            <span>FEATURE</span>
+                        </div>
+
+                        <div>
+                            <span>IMPORTANCE</span>
+                        </div>
+
+                    </div>
+
+                    <div id="importanceList">
+                        Loading model signals...
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 MODEL
+            ================================================== -->
+
+            <section id="model" class="page-section">
+
+                <div class="page-heading reveal">
+
+                    <div class="eyebrow">
+                        MODEL INFORMATION
+                    </div>
+
+                    <h2>
+                        Production model
+                    </h2>
+
+                    <p>
+                        Technical details of the model powering
+                        FounderFlow predictions.
+                    </p>
+
+                </div>
+
+
+                <div class="model-grid">
+
+                    <div class="panel model-main-card">
+
+                        <div class="large-model-icon">
+                            ◈
+                        </div>
+
+                        <div class="eyebrow">
+                            PRODUCTION CLASSIFIER
+                        </div>
+
+                        <h3>
+                            Random Forest
+                        </h3>
+
+                        <p>
+                            FounderFlow uses the best-performing
+                            model selected during the training
+                            pipeline.
+                        </p>
+
+                        <div class="model-specs">
+
+                            <div>
+                                <span>Estimators</span>
+                                <strong>200</strong>
+                            </div>
+
+                            <div>
+                                <span>Features</span>
+                                <strong>15</strong>
+                            </div>
+
+                            <div>
+                                <span>Classes</span>
+                                <strong>2</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-kicker">
+                            PIPELINE
+                        </div>
+
+                        <h3>
+                            How FounderFlow works
+                        </h3>
+
+                        <div class="pipeline">
+
+                            <div class="pipeline-step">
+                                <div>01</div>
+                                <span>Startup profile</span>
+                            </div>
+
+                            <div class="pipeline-line"></div>
+
+                            <div class="pipeline-step">
+                                <div>02</div>
+                                <span>FastAPI</span>
+                            </div>
+
+                            <div class="pipeline-line"></div>
+
+                            <div class="pipeline-step">
+                                <div>03</div>
+                                <span>Random Forest</span>
+                            </div>
+
+                            <div class="pipeline-line"></div>
+
+                            <div class="pipeline-step">
+                                <div>04</div>
+                                <span>Exit probability</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="disclaimer">
+                    <span>ⓘ</span>
+                    FounderFlow provides model-based decision-support
+                    signals. Predictions are estimates and should
+                    complement, not replace, investment diligence.
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- TOAST -->
+<div id="toast" class="toast">
+    <span id="toastIcon">✓</span>
+    <span id="toastMessage"></span>
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
