@@ -2,11 +2,10 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     { "source": "/", "destination": "/frontend/index.html" },
-    { "source": "/api/:path*", "destination": "/api/index.py" },
-    { "source": "/:path*", "destination": "/frontend/:path*" }
+    { "source": "/((?!api(?:/|$)).*)", "destination": "/frontend/$1" }
   ],
   "functions": {
-    "api/index.py": {
+    "api/*.py": {
       "maxDuration": 60,
       "excludeFiles": "{dataset/**,reports/**,notebooks/**,**/__pycache__/**,frontend/index-old.html,frontend/script-old.js,frontend/style-old.css}"
     }
