@@ -8,11 +8,11 @@ BACKEND = os.path.join(ROOT, "backend")
 if BACKEND not in sys.path:
     sys.path.insert(0, BACKEND)
 
-from app import app
+from app import app as fastapi_app
 
 
 class StripApiPrefix:
-    """Make FastAPI routes work when Vercel invokes the function under /api/* ."""
+    """Strip Vercel's /api prefix before handing the request to FastAPI."""
 
     def __init__(self, app: ASGIApp):
         self.app = app
@@ -32,4 +32,4 @@ class StripApiPrefix:
         await self.app(scope, receive, send)
 
 
-handler = StripApiPrefix(app)
+app = StripApiPrefix(fastapi_app)
