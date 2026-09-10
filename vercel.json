@@ -1,8 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [
-    { "source": "/", "destination": "/frontend/index.html" },
-    { "source": "/((?!api(?:/|$)).*)", "destination": "/frontend/$1" }
+  "routes": [
+    { "src": "/api/(.*)", "continue": true },
+    { "src": "/$", "dest": "/index.html" },
+    { "src": "/(.*)", "dest": "/frontend/$1" }
   ],
   "functions": {
     "api/*.py": {
