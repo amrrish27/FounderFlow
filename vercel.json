@@ -1,8 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "routes": [
-    { "src": "/api/(.*)", "continue": true },
-    { "src": "/$", "dest": "/index.html" },
+    { "src": "/api/health", "dest": "/api/health.py" },
+    { "src": "/api/predict", "methods": ["POST"], "dest": "/api/predict.py" },
+    { "src": "/api/feature-importance", "dest": "/api/feature-importance.py" },
+    { "src": "/", "dest": "/frontend/index.html" },
     { "src": "/(.*)", "dest": "/frontend/$1" }
   ],
   "functions": {
