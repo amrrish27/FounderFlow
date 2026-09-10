@@ -1,4 +1,3 @@
-import os
 import sys
 from pathlib import Path
 
@@ -49,27 +48,19 @@ class StartupInput(BaseModel):
     tags: float
 
 
-@app.middleware("http")
-async def normalize_api_prefix(request, call_next):
-    path = request.scope.get("path", "")
-    if path == "/api":
-        request.scope["path"] = "/"
-    elif path.startswith("/api/"):
-        request.scope["path"] = path[4:]
-    return await call_next(request)
-
-
-@app.get("/")
-def root():
+# Vercel maps api/index.py to /api/*, so the FastAPI routes must retain
+# the /api prefix to match the incoming production URL.
+@app.get("/api")
+def api_root():
     return {"name": "FounderFlow API", "status": "online"}
 
 
-@app.get("/health")
+@app.get("/api/health")
 def health():
     return {"status": "healthy"}
 
 
-@app.post("/predict")
+@app.post("/api/predict")
 def predict(payload: StartupInput):
     try:
         return predict_startup(payload.model_dump())
@@ -77,7 +68,7 @@ def predict(payload: StartupInput):
         raise HTTPException(status_code=500, detail=f"Prediction failed: {exc}") from exc
 
 
-@app.get("/feature-importance")
+@app.get("/api/feature-importance")
 def feature_importance():
     try:
         return {"features": get_feature_importance()}
@@ -85,6 +76,6 @@ def feature_importance():
         raise HTTPException(status_code=500, detail=f"Feature importance failed: {exc}") from exc
 
 
-# The function can also serve the UI when invoked at the site root.
+# Serve the existing static UI from the FastAPI application root.
 if FRONTEND.exists():
     app.mount("/", StaticFiles(directory=str(FRONTEND), html=True), name="frontend")
