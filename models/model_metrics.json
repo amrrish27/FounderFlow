@@ -1,0 +1,18 @@
+{
+  "model": "Decision Tree",
+  "model_version": "7.1.0",
+  "leakage_safe": true,
+  "excluded_features": ["exit_type"],
+  "features": ["founded_year","country","region","industry","funding_round","funding_amount_usd","lead_investor","co_investors","employee_count","estimated_revenue_usd","estimated_valuation_usd","tags","funding_year","funding_month"],
+  "dataset_rows": 50000,
+  "test_rows": 10000,
+  "target": "exited",
+  "positive_class": "success/exit",
+  "probability_note": "Success/failure percentages are model probabilities estimated from training data; they are not guarantees.",
+  "results": {
+    "Logistic Regression": {"accuracy":0.8493,"precision":0.2142857143,"recall":0.0102249489,"f1":0.0195185426,"roc_auc":0.5070250130},
+    "Decision Tree": {"accuracy":0.2707,"precision":0.1482733639,"recall":0.8370824813,"f1":0.2519232742,"roc_auc":0.5046210586},
+    "Random Forest": {"accuracy":0.8531,"precision":0.0,"recall":0.0,"f1":0.0,"roc_auc":0.5025074072}
+  },
+  "notes": "Prediction excludes exit_type to prevent target leakage. Idea Analyzer and competitor/financial tools are deterministic/explainable."
+}
