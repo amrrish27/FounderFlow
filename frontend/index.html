@@ -45,7 +45,7 @@ function go(id){$$(".page").forEach(x=>x.classList.toggle("active",x.id===id));$
 $$("[data-p]").forEach(x=>x.addEventListener("click",()=>go(x.dataset.p)));
 $("#theme").addEventListener("click",()=>{document.body.classList.toggle("light");$("#theme").textContent=document.body.classList.contains("light")?"☀ Light":"☾ Dark"});
 setTimeout(()=>$("#intro").classList.add("hide"),1800);
-async function api(path,opts){opts=opts||{};const r=await fetch(API+path,{...opts,headers:{"Content-Type":"application/json",...(opts.headers||{})}});let data={};try{data=await r.json()}catch(e){}if(!r.ok)throw new Error(data.detail||("API error "+r.status));return data}
+async function api(path,opts){opts=opts||{};const r=await fetch(API+path,{...opts,headers:{"Content-Type":"application/json",...(opts.headers||{})}});let data={};try{data=await r.json()}catch(e){}if(!r.ok){const detail=data&&data.detail;const msg=typeof detail==="string"?detail:detail?JSON.stringify(detail):("API error "+r.status);throw new Error(msg)}return data}
 function list(a){return (a||[]).map(x=>"<li>"+x+"</li>").join("")}
 $("#fields").innerHTML=names.map((n,i)=>"<label>"+n.replaceAll("_"," ")+"<input id='"+n+"' type='number' value='"+vals[i]+"'></label>").join("");
 async function boot(){
